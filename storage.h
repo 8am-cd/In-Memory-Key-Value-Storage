@@ -11,10 +11,14 @@ private:
     std::unordered_map<std::string, std::string> _table;
 
 public:
+    Storage () = default;
     Storage (const Storage& storage) = delete;
     Storage& operator=(const Storage& storage) = delete;
+    ~Storage() = default;
 
-    bool Put(const std::string& key, const std::string& value);
+    bool Add(const std::string& key, const std::string& value);
+
+    bool Update(const std::string& key, const std::string& value);
 
     std::optional<std::string> Get(const std::string& key) const;
 

@@ -1,12 +1,23 @@
 #include "storage.h"
 
-bool Storage::Put(const std::string& key, const std::string& value) {
+bool Storage::Add(const std::string& key, const std::string& value) {
     auto it = _table.find(key);
     bool in_table = it != _table.end();
-    _table[key] = value;
+    if (!in_table)
+        _table[key] = value;
+
+    return !in_table;
+}
+
+bool Storage::Update(const std::string& key, const std::string& value) {
+    auto it = _table.find(key);
+    bool in_table = it != _table.end();
+    if (in_table)
+        it->second = value;
 
     return in_table;
 }
+
 
 
 std::optional<std::string> Storage::Get(const std::string &key) const{
